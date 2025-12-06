@@ -1,10 +1,15 @@
 # Tree-sitter parser fuzzing
 
+> [!IMPORTANT]
+> This only works on Linux.
+
 ## Options
 
 ```yaml
 directory:
   description: The directory of the grammar
+corpus:
+  description: The directory of the seed corpus
 timeout:
   description: The time to wait if the fuzzer hangs
   default: 10
@@ -16,7 +21,7 @@ max-length:
   default: 4096
 tree-sitter-version:
   description: The tree-sitter version to install
-  default: v0.21.0
+  default: latest
 ```
 
 ## Example configuration
@@ -41,6 +46,25 @@ jobs:
       - uses: actions/checkout@v4
       - uses: tree-sitter/fuzz-action@v4
 ```
+
+## Using locally
+
+### Requirements
+
+- `pkg-config`
+- `make`
+- `jq`
+- `llvm`
+- `tree-sitter` library
+
+### Usage
+
+```bash
+make LANG_NAME=parser LANG_DIR=/path/to/tree-sitter-parser
+```
+
+> [!TIP]
+> Check the [Makefile](./Makefile) for more options.
 
 ## Credits
 
